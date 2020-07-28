@@ -1,3 +1,5 @@
+process.env.NODE_ENV = ( process.env.NODE_ENV && ( process.env.NODE_ENV ).trim().toLowerCase() == 'production' ) ? 'production' : 'development';
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');

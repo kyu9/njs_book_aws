@@ -15,13 +15,5 @@
     "mysql2": "^2.1.0",
     "pug": "2.0.0-beta11",
     "sequelize": "^6.3.3"
-  },
-  "development": {
-    "username": "root",
-    "password": "shim0329",
-    "database": "mywork",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
   }
 }
