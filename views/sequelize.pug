@@ -14,8 +14,6 @@ html
             }
     body
         div
-            script(src='./public/images/12단1.png')
-        div
             form#user-form
                 fieldset
                     legend 사용자 등록
@@ -23,6 +21,8 @@ html
                         input#username(type="text" placeholder="이름")
                     div
                         input#age(type="number" placeholder="나이")
+                    div
+                        input#desc(type="text" placeholder="자기소개...")
                     div
                         input#married(type="checkbox")
                         label(for="married") 결혼 여부
@@ -35,6 +35,7 @@ html
                     th 이름
                     th 나이
                     th 결혼여부
+                    th 자기소개
             tbody
                 for user in users
                     tr
@@ -42,6 +43,10 @@ html
                         td= user.name
                         td= user.age
                         td= user.married ? '기혼' : '미혼'
+                        td= user.comment
+        form#user-delete
+            div
+                button(type="submit") 사용자 삭제
         br
         div
             form#comment-form
@@ -56,7 +61,7 @@ html
         table#comment-list
             thead
                 tr
-                    th 아이디
+                    th 댓글ID
                     th 작성자
                     th 댓글
                     th 수정

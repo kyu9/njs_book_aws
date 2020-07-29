@@ -1,10 +1,32 @@
 // 사용자 이름 눌렀을 때 댓글 로딩
+var userid;
+
 [].forEach.call(document.querySelectorAll('#user-list tr'), function (el) {
     el.addEventListener('click', function () {
         var id = el.querySelector('td').textContent;
         getComment(id);
+        userid=id;
     });
 });
+
+
+document.getElementById('user-delete').addEventListener('submit', function(e){
+    e.preventDefault();
+    var xhr = new XMLHttpRequest();
+    xhr.onload=function (){
+        if(xhr.status===201){
+            console.log(xhr.responseText);
+        }else{
+            console.error(xhr.responseText);
+        }
+    };
+    xhr.open('DELETE', '/users/'+userid);
+    xhr.setRequestHeader('Content-Type','application/json');
+    xhr.send(JSON.stringify({id:userid}));
+    getUser();
+});
+
+
 // 사용자 로딩
 function getUser() {
     var xhr = new XMLHttpRequest();
@@ -30,6 +52,9 @@ function getUser() {
                 row.appendChild(td);
                 td = document.createElement('td');
                 td.textContent = user.married ?'기혼' :'미혼';
+                row.appendChild(td);
+                td = document.createElement('td');
+                td.textContent = user.comment;
                 row.appendChild(td);
                 tbody.appendChild(row);
             });
@@ -114,6 +139,7 @@ document.getElementById('user-form').addEventListener('submit', function (e) {
     e.preventDefault();
     var name = e.target.username.value;
     var age = e.target.age.value;
+    var comment = e.target.desc.value;
     var married = e.target.married.checked;
     if (!name) {
         return alert('이름을 입력하세요');
@@ -132,9 +158,10 @@ document.getElementById('user-form').addEventListener('submit', function (e) {
     };
     xhr.open('POST','/users');
     xhr.setRequestHeader('Content-Type','application/json');
-    xhr.send(JSON.stringify({ name: name, age: age, married: married }));
+    xhr.send(JSON.stringify({ name: name, age: age, comment: comment, married: married }));
     e.target.username.value ='';
     e.target.age.value ='';
+    e.target.desc.value = '';
     e.target.married.checked = false;
 });
 // 댓글 등록 시
