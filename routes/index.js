@@ -13,4 +13,13 @@ router.get('/', async (req, res, next)=>{
   }
 });
 
+router.get('/mypage', async(req, res, next) => {
+  try{
+    res.render('mypage');
+  }catch (e){
+    console.error(e);
+    next(e);
+  }
+})
+
 module.exports = router;

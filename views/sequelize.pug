@@ -2,7 +2,7 @@ doctype html
 html
     head
         meta(charset='utf-8')
-        title 댓글 목록..
+        title 댓글실험실
         style.
             table {
                 border: 1px solid black;
@@ -44,14 +44,16 @@ html
                         td= user.age
                         td= user.married ? '기혼' : '미혼'
                         td= user.comment
+
         form#user-delete
             div
                 button(type="submit") 사용자 삭제
+                p#curid 현재 선택된 사용자 : #{users.name}
         br
         div
             form#comment-form
                 fieldset
-                    legend 댓글 등록
+                    legend 댓글 등록(사용자를 누르고 사용하세요!)
                     div
                         input#userid(type="text" placeholder="사용자 아이디")
                     div
@@ -68,3 +70,6 @@ html
                     th 삭제
             tbody
         script(src='/sequelize.js')
+        br
+        div
+            a(href='/mypage') 환상의 세계로...

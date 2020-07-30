@@ -1,29 +1,28 @@
 // 사용자 이름 눌렀을 때 댓글 로딩
-var userid;
+var curuid=0;
 
 [].forEach.call(document.querySelectorAll('#user-list tr'), function (el) {
     el.addEventListener('click', function () {
         var id = el.querySelector('td').textContent;
         getComment(id);
-        userid=id;
     });
 });
 
 
 document.getElementById('user-delete').addEventListener('submit', function(e){
-    e.preventDefault();
+    e.preventDefault()
     var xhr = new XMLHttpRequest();
     xhr.onload=function (){
         if(xhr.status===201){
             console.log(xhr.responseText);
+            getUser();
         }else{
             console.error(xhr.responseText);
         }
     };
-    xhr.open('DELETE', '/users/'+userid);
+    xhr.open('DELETE', '/users/' + curuid);
     xhr.setRequestHeader('Content-Type','application/json');
-    xhr.send(JSON.stringify({id:userid}));
-    getUser();
+    xhr.send(JSON.stringify({id:curuid}));
 });
 
 
@@ -67,6 +66,9 @@ function getUser() {
 }
 // 댓글 로딩
 function getComment(id) {
+
+    curuid=id;
+    document.getElementById('curid').append(curuid);
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.status === 200) {
