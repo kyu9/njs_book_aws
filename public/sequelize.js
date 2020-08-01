@@ -57,6 +57,11 @@ function getUser() {
                 row.appendChild(td);
                 tbody.appendChild(row);
             });
+            curuid = user.id
+            if(document.getElementById('curid')!=empty()){
+                document.getElementById('curid').empty();
+            }
+            document.getElementById('curid').append(users.name);
         } else {
             console.error(xhr.responseText);
         }
@@ -66,7 +71,6 @@ function getUser() {
 }
 // 댓글 로딩
 function getComment(id) {
-
     curuid=id;
     document.getElementById('curid').append(curuid);
     var xhr = new XMLHttpRequest();
