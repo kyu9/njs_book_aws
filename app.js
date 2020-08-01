@@ -8,6 +8,11 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var commentsRouter = require('./routes/comments');
 var sequelize = require('./models').sequelize;
+const redis = require('redis');
+const client = redis.createClient();
+client.get('name', (err, reply)=>{
+  console.log(reply);
+});
 
 var app = express();
 sequelize.sync();
