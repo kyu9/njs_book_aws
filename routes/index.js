@@ -1,4 +1,6 @@
 var express = require('express');
+const redis = require('redis');
+const redisClient = redis.createClient();
 var User = require('../models').User;
 var router = express.Router();
 
